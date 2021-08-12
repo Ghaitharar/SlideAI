@@ -20,3 +20,8 @@ This example show the result of slicing a WSI .svs file obtain from a public and
 ![image](https://user-images.githubusercontent.com/54161236/129137501-376deaa2-e208-4801-9632-9b5c63a87aa7.png)
 
 Each tile is 500 x 500; the classifier disrecarded background tiles.
+
+![image](https://user-images.githubusercontent.com/54161236/129137888-2bcd9fb6-12d5-4508-af01-7fa8532aa1f0.png)
+
+![image](https://user-images.githubusercontent.com/54161236/129137789-28dd4e97-6f6f-46c6-992e-3d781a3c10a6.png)
+
