@@ -4,7 +4,9 @@ SlideAi is a tool to read Aperio scanner histology whole slide images .svs files
 
 ## Built With:
 OpenSlide-python
+
 Pillow
+
 PyTorch
 
 ## Usage
