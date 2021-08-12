@@ -15,13 +15,13 @@ Converting Aperio scanner histology WSI in .svs format and their annotation .xml
 ## Example
 This example show the result of slicing a WSI .svs file obtain from a public and open source. The WSI has a resulotion of 32001 x 38474 with a mock annotation .xml file that contains 5 random annotations. 
 
-`
+```
 slide = slideai.SlideAi("test_1.svs")
 slide.read_annotation_file()
 slide.make_annotation_binary_mask()
-slide.build_tile_classifier("trained_classification_model.pth")  # two input pre-trianed tile classifier
+slide.build_tile_classifier("trained_classification_model.pth")  #  pre-trianed tile classifier
 slide.make_tiles(tile_size=500, output_path="output_path/", classify_tile=True)
-`
+```
 
 ![image](https://user-images.githubusercontent.com/54161236/129137381-3ad0e516-bb36-426f-a6d0-d8ca550170ba.png)
 
