@@ -1,6 +1,6 @@
 # SlideAi
 
-SlideAi is a tool to read Aperio scanner histology whole slide images .svs files and their associated .xml annotation files, slice WSI into tiles, and making tile masks for segmentation.
+SlideAi is a tool to read Aperio scanner histology whole slide images .svs files and their associated .xml annotation files, slice WSI into tiles, and make tile masks for segmentation.
 
 ## Built With:
 OpenSlide-python
