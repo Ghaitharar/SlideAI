@@ -9,3 +9,12 @@ PyTorch
 
 ## Usage
 Converting Aperio scanner histology WSI in .svs format and their annotation .xml files to .jpg tiles and .png binary masks. This could be a part of a larger data-preprocessing pipeline for instance segmentation training/inference. The slicer can classify each tile as background/tissue tile and keep only tissue tiles; however, user needs to pass a pre-trained model to the classifier function which uses TorchVision vgg11_bn with two output classes.
+
+## Example
+This example show the result of slicing a WSI .svs file obtain from a public and open source. The WSI has a resulotion of 32001 x 38474 with a mock annotation .xml file that contains 5 random annotations. 
+
+![image](https://user-images.githubusercontent.com/54161236/129137381-3ad0e516-bb36-426f-a6d0-d8ca550170ba.png)
+
+![image](https://user-images.githubusercontent.com/54161236/129137501-376deaa2-e208-4801-9632-9b5c63a87aa7.png)
+
+Each tile is 500 x 500; the classifier disrecarded background tiles.
