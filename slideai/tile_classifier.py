@@ -7,7 +7,6 @@ import torchvision.transforms as transforms
 device = ("cuda" if torch.cuda.is_available() else "cpu")
 
 def build_classifier_transforms(size):
-    """Return classifier inference transforms"""
     return transforms.Compose(
         [transforms.Resize((size, size)),
          transforms.ToTensor(),
@@ -15,11 +14,11 @@ def build_classifier_transforms(size):
 
 
 def build_classifier(path_to_pth):
-    """ Load a Pytorch pretrained classification model to classify tile as:
+    ''' Load a Pytorch pretrained classification model to classify tile as:
             0: Background/ Empty tile
             1: Tissue Tile (Tile contain at least 5% tissue
 
-    """
+     '''
     classifier_device = ("cuda" if torch.cuda.is_available() else "cpu")
     B_T_Classifier_inf = models.vgg11_bn(pretrained=False, progress=True, num_classes=2)
     B_T_Classifier_inf.load_state_dict(torch.load(path_to_pth))
