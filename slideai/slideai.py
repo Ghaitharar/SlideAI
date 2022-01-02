@@ -3,7 +3,7 @@ import openslide
 import numpy
 import math
 import numpy as np
-import tile_classifier
+
 import torch
 
 from xml.etree import ElementTree
@@ -15,6 +15,32 @@ import torchvision.transforms as transforms
 
 import gc
 
+
+import torch
+import torchvision.models as models
+import torchvision.transforms as transforms
+
+device = ("cuda" if torch.cuda.is_available() else "cpu")
+
+def build_classifier_transforms(size):
+    return transforms.Compose(
+        [transforms.Resize((size, size)),
+         transforms.ToTensor(),
+         transforms.Normalize((0.5,0.5,0.5), (0.5,0.5,0.5))])
+
+
+def build_classifier(path_to_pth):
+    ''' Load a Pytorch pretrained classification model to classify tile as:
+            0: Background/ Empty tile
+            1: Tissue Tile (Tile contain at least 5% tissue
+
+     '''
+    classifier_device = ("cuda" if torch.cuda.is_available() else "cpu")
+    B_T_Classifier_inf = models.vgg11_bn(pretrained=False, progress=True, num_classes=2)
+    B_T_Classifier_inf.load_state_dict(torch.load(path_to_pth))
+    B_T_Classifier_inf.eval()
+    B_T_Classifier_inf.to(classifier_device)
+    return B_T_Classifier_inf
 
 
 class SlideAi (openslide.OpenSlide):
@@ -98,16 +124,16 @@ class SlideAi (openslide.OpenSlide):
 
     def build_tile_classifier(self, path_to_pth):
         if self.classifier is None:
-            self.classifier = tile_classifier.build_classifier(path_to_pth)
+            self.classifier = build_classifier(path_to_pth)
 
-    def make_tiles(self, tile_sizes=[500], output_tile_size=(500,500), output_path=None, classify_tile=False, masked_only=False):
+    def make_tiles(self, tile_sizes=(500), output_tile_size=(500,500), output_path=None, classify_tile=False, masked_only=False):
 
         self.outputs_path = os.path.dirname(self._filename) if output_path is None else output_path
         if classify_tile and self.classifier is None:
             print("Classifier is not found. build a classifier model with self.build_tile_classifier")
             return
         if classify_tile and self.classifier is not None:
-            self.classifier_transforms = tile_classifier.build_classifier_transforms(output_tile_size)
+            self.classifier_transforms = build_classifier_transforms(output_tile_size)
 
         if self.annotation_PIL_mask is not None:
             try:
